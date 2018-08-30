@@ -1,26 +1,17 @@
-"""
-implement producer and consumer by generator
-"""
+def producer(consumer):
+    consumer.send(None)
+    for i in range(1, 11):
+        print('producing: %s' % i)
+        consumer.send(i)
+    consumer.close()
+        
 
-def producer():
-    i = 0
-    stop = False 
-
+def consumer():
     while True:
-        print('producing %s item...' % i)
-        yield i
-        i += 1
-
-
-def consumer(producer):
-    for i in range(10):
-        ret = next(producer)
-        print('consuming %s item...' % ret)
-
-    producer.close()
-    print('finish produce and consume')
+        n = (yield)
+        print('consuming: %s' % n)
         
 
 if __name__ == '__main__':
-    p = producer()
-    consumer(p)
+    c = consumer()
+    producer(c)
