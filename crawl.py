@@ -13,8 +13,7 @@ function main(splash, args)
   }
 end
 """
-
-ENDPOINT = 'http://localhost:8050' + '/execute'
+ENDPOINT = 'http://localhost:8050/execute'
 
 
 def crawl(url):
