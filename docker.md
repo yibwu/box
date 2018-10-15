@@ -50,6 +50,11 @@
 - Dockerfile指定匿名数据卷```VOLUME ["<路径1>", "<路径2>"...]```
 
 
+#### Docker数据卷容器
+  - ![image](https://note.youdao.com/yws/api/personal/file/WEBa630461b20a92be667971f740fe63df4?method=download&shareKey=37bdab4ee774db6fe1ad8a22f630037b)
+  - ```docker run --volumes-from container_name IMAGE```
+
+
 #### Docker容器的网络连接
 - 容器间的互联
   - Docker守护进程的启动选项```--icc=true``` 
