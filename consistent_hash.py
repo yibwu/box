@@ -3,22 +3,22 @@ import binascii
 
 class ConsistentHash:
     
-    def __init__(self, nodes=[], count=3):
-        self.count = count
+    def __init__(self, nodes=[], replicas=3):
+        self.replicas = replicas 
         self.ring = []
         self.num_node = dict()    
         for node in nodes:
             self.add_node(node)
 
     def add_node(self, node):
-        for i in range(self.count):
+        for i in range(self.replicas):
             crc32 = binascii.crc32(node + str(i))            
             self.ring.append(crc32)
             self.num_node[crc32] = node
         self.ring.sort()
     
     def remove_node(self, node):
-        for i in range(self.count):
+        for i in range(self.replicas):
             crc32 = binascii.crc32(node + str(i))            
             if crc32 in self.ring:
                 self.ring.remove(crc32)
