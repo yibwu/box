@@ -1,8 +1,12 @@
+# -*- coding: UTF-8 -*-
+
+
 class UnionFind:
     
     def __init__(self, size):
         self.nums = [-1 for _ in range(size + 1)]
 
+    # 查找x的父节点
     def find(self, x):
         if self.nums[x] < 0:
             return x 
@@ -10,6 +14,7 @@ class UnionFind:
             self.nums[x] = self.find(self.nums[x])
             return self.nums[x]
             
+    # 合并两个集合 
     def union(self, x, y):
         px = self.find(x)
         py = self.find(y)
@@ -19,6 +24,7 @@ class UnionFind:
             self.nums[px] += self.nums[py]
             self.nums[py] = px
 
+    # 统计集合内的元素个数 
     def count(self, x):
         px = self.find(x)
         return abs(self.nums[px])
