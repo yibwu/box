@@ -25,10 +25,10 @@ class ConsistentHash:
             if crc32 in self.num_node:
                 del self.num_node[crc32]
 
-    def get_node(self, node):
+    def get_node(self, key):
         if not self.num_node:
             return None, None, None
-        crc32 = binascii.crc32(node)            
+        crc32 = binascii.crc32(key)            
         for n in self.ring:
             if crc32 <= n:
                 return crc32, n, self.num_node[n]
@@ -51,9 +51,9 @@ if __name__ == '__main__':
     ch.print_consistent_hash()
     print('\n')
 
-    cases = ('456', 'aaa', 'abc', '132', '1ac', '90ae')
-    for node in cases:
-        crc32, n, target = ch.get_node(node)
+    keys = ('456', 'aaa', 'abc', '132', '1ac', '90ae')
+    for k in keys:
+        crc32, n, target = ch.get_node(k)
         print(crc32, n, target)
     print('\n')
     
