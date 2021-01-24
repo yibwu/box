@@ -4,15 +4,15 @@ import random
 
 class TokenBucket():
     
-    def __init__(self, rate, capability):
-        self.rate = rate
-        self.capability = capability
-        self._current_amount = 0
+    def __init__(self, rate, capacity):
+        self.rate = float(rate)
+        self.capacity = float(capacity)
+        self._current_amount = self.capacity 
         self._last_consume_time = time.time()
 
     def consume(self, token_amount):
         increment = (time.time() - self._last_consume_time) * self.rate
-        self._current_amount = min(self._current_amount + increment, self.capability)
+        self._current_amount = min(self._current_amount + increment, self.capacity)
         print('token_amount: %s, _current_amount: %s' % (token_amount, self._current_amount))
         if token_amount > self._current_amount:
             return False
